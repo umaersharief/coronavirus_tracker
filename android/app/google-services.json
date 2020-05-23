@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "727785082541",
+    "firebase_url": "https://coronavirus-tracker-4d9a0.firebaseio.com",
+    "project_id": "coronavirus-tracker-4d9a0",
+    "storage_bucket": "coronavirus-tracker-4d9a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:727785082541:android:08196b61cbe1088268c024",
+        "android_client_info": {
+          "package_name": "com.umaersharief.coronavirus_tracker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "727785082541-12mmlj5icav3pa07ad6026a0f7kabmbf.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.umaersharief.coronavirus_tracker",
+            "certificate_hash": "2d7698c28ac032d9b5818cdd9508d7e9c66cf692"
+          }
+        },
+        {
+          "client_id": "727785082541-r50k298med3krdr89s0sde1rml70c0vo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAUmvoZIaleyEWyfXih5uj29fhaB3F-Ixk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "727785082541-r50k298med3krdr89s0sde1rml70c0vo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-3716948913566119~2781912838"
+    }
+  ],
+  "configuration_version": "1"
+}

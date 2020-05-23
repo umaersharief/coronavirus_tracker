@@ -1,6 +1,6 @@
 # coronavirus_tracker
 
-A new Flutter project.
+A Flutter application for tracking coronavirus in Pakistan and patients worldwide.
 
 ## Getting Started
 

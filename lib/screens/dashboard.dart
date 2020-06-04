@@ -4,7 +4,6 @@ import 'package:coronavirus_tracker/screens/bottom_nav_widgets/bottom_nav_screen
 import 'package:coronavirus_tracker/screens/bottom_nav_widgets/bottom_nav_screen_three.dart';
 import 'package:coronavirus_tracker/screens/bottom_nav_widgets/bottom_nav_screen_four.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_admob/firebase_admob.dart';
 import 'package:coronavirus_tracker/utils/app_utils.dart';
 
 final Color backgroundColor = Color(0xff4a4a58);
@@ -19,14 +18,6 @@ class Dashboard extends StatefulWidget {
 
 class _DashboardState extends State<Dashboard>
     with SingleTickerProviderStateMixin {
-      
-
-
-      //firebase admob
-  MobileAdTargetingInfo targetingInfo;
-  InterstitialAd myInterstitial;
-
-
 
   double screenWidth, screenHeight;
   bool isColapsed = true;
@@ -48,60 +39,10 @@ class _DashboardState extends State<Dashboard>
   final Duration slideAnimationDuration = const Duration(milliseconds: 1000);
   AnimationController _animationController;
   Animation<Offset> _slideAnimation;
-  
-  //Interstitial ad unit id
-  //'ca-app-pub-3716948913566119~2781912838'
 
   @override
   void initState() {
     super.initState();
-    FirebaseAdMob.instance.initialize(appId: 'ca-app-pub-3716948913566119~2781912838');
-
-    MobileAdTargetingInfo targetingInfo = MobileAdTargetingInfo(
-  keywords: <String>['flutterio', 'beautiful apps'],
-  contentUrl: 'https://flutter.io',
-  childDirected: false,
-);
-
-    myInterstitial = InterstitialAd(
-  // Replace the testAdUnitId with an ad unit id from the AdMob dash.
-  // https://developers.google.com/admob/android/test-ads
-  // https://developers.google.com/admob/ios/test-ads
-  //'ca-app-pub-3716948913566119/9550501166'
-  adUnitId: 'ca-app-pub-3716948913566119/7777737579',
-  targetingInfo: targetingInfo,
-  listener: (MobileAdEvent event) {
-    print("InterstitialAd event is $event");
-  },
-);
-
-    _animationController = AnimationController(
-      vsync: this,
-      duration: slideAnimationDuration,
-    );
-    _slideAnimation = Tween<Offset>(begin: Offset.zero, end: Offset(0.5, 0))
-        .animate(_animationController);
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
-
-  //ad show
-  void _showInterstitialAd(){
-    myInterstitial
-  // typically this happens well before the ad is shown
-  ..load()
-  ..show(
-    // Positions the banner ad 60 pixels from the bottom of the screen
-    anchorOffset: 60.0,
-    // Positions the banner ad 10 pixels from the center of the screen to the right
-    horizontalCenterOffset: 10.0,
-    // Banner Position
-    anchorType: AnchorType.bottom,
-  );
   }
 
   @override
@@ -154,7 +95,6 @@ class _DashboardState extends State<Dashboard>
                 icon: Icon(Icons.menu),
                 onPressed: () {
                   print('onPressed Clicked');
-                  _showInterstitialAd();
                   if (isColapsed) {
                     _animationController.forward();
                   } else {
@@ -248,35 +188,6 @@ class _DashboardState extends State<Dashboard>
                 ),
           ),
           SizedBox(height: 50),
-          // GestureDetector(
-          //   onTap: () {
-          //     setState(() {
-          //       menuItemOneTapped = true;
-          //       menuItemTwoTapped = false;
-          //       menuItemThreeTapped = false;
-          //       menuItemFourTapped = false;
-          //       menuItemFiveTapped = false;
-          //     });
-          //   },
-          //   child: Container(
-          //     decoration: BoxDecoration(
-          //       borderRadius: BorderRadius.circular(10.0),
-          //     ),
-          //     width: 400,
-          //     height: 100,
-          //     child: Padding(
-          //       padding: const EdgeInsets.all(8.0),
-          //       child: RichText(
-          //         text: TextSpan(
-          //             style: TextStyle(color: appBar_icons_text_color),
-          //             text: """Coronavirus disease (COVID-19) is an infectious 
-          //           disease caused by a newly discovered coronavirus. Most 
-          //           people who fall sick with COVID-19 will experience mild 
-          //           to moderate symptoms and recover without special treatment."""),
-          //       ),
-          //     ),
-          //   ),
-          // ),
           SizedBox(height: 5),
           Divider(),
           SizedBox(height: 5),

@@ -5,6 +5,7 @@ import 'package:coronavirus_tracker/utils/app_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:coronavirus_tracker/models/daily_updates_model.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:firebase_admob/firebase_admob.dart';
 
 final Color backgroundColor = Color(0xff4a4a58);
 final Color dashboardBackgroundColor = Colors.deepOrange;
@@ -20,12 +21,46 @@ class _DashboardState extends State<BottomNavigationScreenOne>
     with SingleTickerProviderStateMixin {
   double screenWidth, screenHeight;
 
+  //firebase admob
+  MobileAdTargetingInfo targetingInfo;
+  BannerAd myBanner;
+
+  //banner ad unit id
+  //'ca-app-pub-3716948913566119~2781912838'
+
   bool isColapsed = true;
   List<DailyUpdatesModel> _models;
 
   @override
   void initState() {
     super.initState();
+    FirebaseAdMob.instance.initialize(appId: 'ca-app-pub-3716948913566119~2781912838');
+    targetingInfo = MobileAdTargetingInfo(
+      keywords: <String>['flutterio', 'beautiful apps'],
+      contentUrl: 'https://flutter.io',
+      childDirected: false,
+    );
+
+    myBanner = BannerAd(
+      adUnitId: 'ca-app-pub-3716948913566119/4050724481',
+      size: AdSize.banner,
+      targetingInfo: targetingInfo,
+      listener: (MobileAdEvent event) {
+        print("BannerAd event is $event");
+      },
+    );
+    myBanner
+  // typically this happens well before the ad is shown
+  ..load()
+  ..show(
+    // Positions the banner ad 60 pixels from the bottom of the screen
+    anchorOffset: 60.0,
+    // Positions the banner ad 10 pixels from the center of the screen to the right
+    horizontalCenterOffset: 10.0,
+    // Banner Position
+    anchorType: AnchorType.bottom,
+  );
+
     DailyUpdatesService.getModel().then((model) {
       setState(() {
         _models = model;
